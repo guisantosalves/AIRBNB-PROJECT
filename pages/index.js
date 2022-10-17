@@ -5,7 +5,8 @@ import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 
-export default function Home(props) {
+export default function Home({exploreData}) {
+
   return (
     <div className="">
       {/* it's like Head in html file */}
@@ -25,16 +26,20 @@ export default function Home(props) {
         </section>
 
         {/* pull some data from a server */}
+        {exploreData?.map((item, index)=>(
+          <h1 key={index}>{item.location}</h1>
+        ))}
       </main>
     </div>
   );
 }
 
 // get before delivery to the browser
+// when return the props we can get that in the component
 export async function getStaticProps() {
-  const exploreData = await fetch('https://links.papareact.com/pyp')
+  const exploreData = await fetch('https://www.jsonkeeper.com/b/4G1G')
   .then(res => res.json());
-
+  
   return {
     props: {
       exploreData
