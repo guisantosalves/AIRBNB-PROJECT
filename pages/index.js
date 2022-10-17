@@ -2,11 +2,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+
+// components
 import Header from "../components/Header";
 import Banner from "../components/Banner";
+import SmallCard from "../components/SmallCard";
 
-export default function Home({exploreData}) {
-
+export default function Home({ exploreData }) {
   return (
     <div className="">
       {/* it's like Head in html file */}
@@ -26,8 +28,15 @@ export default function Home({exploreData}) {
         </section>
 
         {/* pull some data from a server */}
-        {exploreData?.map((item, index)=>(
-          <h1 key={index}>{item.location}</h1>
+        {exploreData?.map((item, index) => (
+
+          <SmallCard
+            key={index}
+            location={item?.location}
+            distance={item?.distance}
+            img={item?.img}
+          />
+
         ))}
       </main>
     </div>
@@ -37,12 +46,13 @@ export default function Home({exploreData}) {
 // get before delivery to the browser
 // when return the props we can get that in the component
 export async function getStaticProps() {
-  const exploreData = await fetch('https://www.jsonkeeper.com/b/4G1G')
-  .then(res => res.json());
-  
+  const exploreData = await fetch("https://www.jsonkeeper.com/b/4G1G").then(
+    (res) => res.json()
+  );
+
   return {
     props: {
-      exploreData
-    }
-  }
+      exploreData,
+    },
+  };
 }
