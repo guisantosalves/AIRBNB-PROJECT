@@ -59,7 +59,6 @@ export default function Home({ exploreData, cardData }) {
           desctiption="Wishlist curated by Airbnb"
           buttonText="Get Inspired"
         />
-
       </main>
 
       <Footer />
