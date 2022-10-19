@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import Image from "next/image";
 
 // fill -> preenche relativamente ao seu componente pai

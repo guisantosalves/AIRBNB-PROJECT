@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import React, { Component }  from 'react';
 import Image from "next/image";
 
 // top-1/2 -> margin on top half of the relative component

@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import Image from "next/image";
 
 const LargeCard = ({ img, title, desctiption, buttonText }) => {

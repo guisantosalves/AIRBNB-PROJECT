@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import Image from "next/image";
 
 const MediumCard = ({ img, title }) => {
