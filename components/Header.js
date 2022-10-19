@@ -13,6 +13,7 @@ import React from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
+import { useRouter } from "next/router";
 
 // sticky means the header will be fixed into the top
 // py -> padding y axis
@@ -25,6 +26,7 @@ const Header = () => {
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
   const [noOfGuests, setNoofGuests] = React.useState(1);
+  const router = useRouter();
 
   // setting to use in datePicker
   const selectionRange = {
@@ -50,6 +52,7 @@ const Header = () => {
       {/* left */}
       <div className="relative flex items-center h-10 cursor-pointer my-auto">
         <Image
+          onClick={()=>router.push("/")}
           src="https://links.papareact.com/qd3"
           layout="fill"
           objectFit="contain"
