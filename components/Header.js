@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 // after 768px -> px-10
 // flex-grow -> like width 100% -> it will grow with the parent content
 // mx-2 -> margin in X axis
-const Header = () => {
+const Header = ({placeholder}) => {
   const [searchInput, setSearchInput] = React.useState("");
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
@@ -41,18 +41,34 @@ const Header = () => {
   };
 
   const resetInput = () => {
-    setSearchInput("")
-    setStartDate(new Date())
-    setEndDate(new Date())
-    setNoofGuests(1)
-  }
+    setSearchInput("");
+    setStartDate(new Date());
+    setEndDate(new Date());
+    setNoofGuests(1);
+  };
+
+  // getting query from the router, that is the thing that
+  // user typed
+  // when the the push redirect
+  // the query will be there
+  const search = () => {
+    router.push({
+      pathname: "/search",
+      query: {
+        location: searchInput,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        noOfGuests: noOfGuests,
+      },
+    });
+  };
 
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md py-5 px-5 md:px-10">
       {/* left */}
       <div className="relative flex items-center h-10 cursor-pointer my-auto">
         <Image
-          onClick={()=>router.push("/")}
+          onClick={() => router.push("/")}
           src="https://links.papareact.com/qd3"
           layout="fill"
           objectFit="contain"
@@ -62,11 +78,12 @@ const Header = () => {
       </div>
 
       {/* main search*/}
+      {/* get the placeholder from props */}
       <div className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm">
         <input
           className="flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
           type="text"
-          placeholder="Start your search"
+          placeholder={placeholder || "Start your search"}
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
@@ -84,11 +101,9 @@ const Header = () => {
           <UserCircleIcon className="h-6 cursor-pointer" />
         </div>
       </div>
-  
+
       {searchInput && (
-
         <div className="flex flex-col col-span-3 mx-auto">
-
           {/*  date */}
           <DateRangePicker
             ranges={[selectionRange]}
@@ -96,7 +111,7 @@ const Header = () => {
             rangeColors={["#FD5B61"]}
             onChange={handleSelect}
           />
-          
+
           {/* number of guests */}
           <div className="flex items-center border-b mb-4">
             {/* flex grow -> fill everything in the space */}
@@ -107,7 +122,7 @@ const Header = () => {
             <UserIcon className="h-5" />
             <input
               value={noOfGuests}
-              onChange={(e)=>setNoofGuests(e.target.value)}
+              onChange={(e) => setNoofGuests(e.target.value)}
               type={"number"}
               min={1}
               className="w-12 pl-2 text-lg outline-none text-red-400"
@@ -121,7 +136,7 @@ const Header = () => {
             <button onClick={resetInput} className="flex-grow text-gray-500">
               Cancel
             </button>
-            <button  className="flex-grow text-red-400">
+            <button onClick={search} className="flex-grow text-red-400">
               Search
             </button>
           </div>

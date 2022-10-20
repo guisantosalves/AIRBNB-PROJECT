@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind components;
-
 /* making my own style */
 @layer components {
   .button {

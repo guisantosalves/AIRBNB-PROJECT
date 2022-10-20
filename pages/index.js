@@ -15,8 +15,6 @@ import Footer from "../components/Footer";
 
 export default function Home({ exploreData, cardData }) {
 
-  
-
   return (
     <div className="">
       {/* it's like Head in html file */}
