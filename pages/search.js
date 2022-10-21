@@ -6,6 +6,7 @@ import format from "date-fns/format";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import InfoCard from "../components/InfoCard";
+import Mapp from "../components/Map";
 
 // we can pass the object from the getServerSideProps
 // the component needs the uppercase, the file doesn't
@@ -18,7 +19,7 @@ const Search = ({ searchResults }) => {
   const formattedStartDate = format(new Date(startDate), "dd MMMM yy");
   const formattedEndDate = format(new Date(endDate), "dd MMMM yy");
   const rangeOfDates = `${formattedStartDate} - ${formattedEndDate}`;
-  console.log(searchResults)
+
   return (
     <div className="h-screen">
       <Header placeholder={`${location} | ${rangeOfDates} | ${noOfGuests}`} />
@@ -62,6 +63,12 @@ const Search = ({ searchResults }) => {
           </div>
 
         </section>
+        
+        {/* only in large screen */}
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <Mapp searchResults={searchResults}/>
+        </section>
+
       </main>
       <Footer />
     </div>
