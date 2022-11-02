@@ -1,4 +1,4 @@
-# web-scraper-golang
+# AIRBNB CLONE
 It is a project using nextjs and tailwind css.
 
 # Note
